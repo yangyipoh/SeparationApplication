@@ -1,0 +1,12 @@
+version:  "3.7"
+
+services:
+  sep_app:
+    container_name: sep_app
+    image: yangyipoh/sep_app
+    ports:
+      - "8501:8501"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
