@@ -9,20 +9,20 @@ import torchaudio
 import torchaudio.functional as F
 import numpy as np
 import matplotlib.pyplot as plt
-from models import MaskNet
+from models.masknet import MaskNet, MaskNetConfig
 
 
 @st.cache_resource
 def load_model():
     """Load model with caching"""
     # model params
-    model_path = 'models/model_best.pt'
-    model_config = 'models/model.yaml'
+    model_path = 'models/masknet/model_best.pt'
+    model_config = 'models/masknet/model.yaml'
     device = torch.device('cpu')
 
     with open(model_config, 'r', encoding='utf-8') as f:
         config = yaml.safe_load(f)
-    model = MaskNet(**config)
+    model = MaskNet(MaskNetConfig(**config))
     state_dict = torch.load(model_path, map_location=device)
     model.load_state_dict(state_dict)
     model.to(device)
@@ -58,7 +58,7 @@ def parse_input() -> Optional[Tensor]:
     if uploaded_file is None:
         return None
     audio_byte = uploaded_file.read()
-    data, fs = torchaudio.load(io.BytesIO(audio_byte))  # pylint: disable=no-member
+    data, fs = torchaudio.load(io.BytesIO(audio_byte), backend="ffmpeg")  # pylint: disable=no-member
     data = data[0]      # only select one channel
     new_fs = 4_000
     data = F.resample(data, fs, new_fs)
