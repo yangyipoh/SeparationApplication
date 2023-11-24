@@ -85,11 +85,22 @@ def parse_audio(audio:np.ndarray, fs:int=4_000, title:str='') -> None:
     st.audio(audio, sample_rate=fs)
 
 
+def sidebar():
+    """sidebar information"""
+    gh_url = r'https://github.com/yangyipoh/SeparationApplication'
+    dcker_url = r'https://hub.docker.com/r/yangyipoh/sep_app'
+    st.caption("Created by Yang Yi Poh: Yang.Poh@monash.edu")
+    st.divider()
+    st.subheader('Application for the paper "Neonatal Chest Sound Separation using Deep Learning"')
+    st.write(f'The following application can be found on [Github]({gh_url}) and [Docker]({dcker_url}) for deployment')
+
 def main():
     """main GUI function"""
-    st.write("Created by Yang Yi Poh: Yang.Poh@monash.edu")
+    # sidebar info
+    with st.sidebar:
+        sidebar()
+
     st.title('Neonatal Chest Sound Separation')
-    st.write('Basic UI to allow interactions with the model')
     model = load_model()
 
     data = parse_input()
