@@ -89,10 +89,14 @@ def sidebar():
     """sidebar information"""
     gh_url = r'https://github.com/yangyipoh/SeparationApplication'
     dcker_url = r'https://hub.docker.com/r/yangyipoh/sep_app'
+    paper_url = r'https://arxiv.org/abs/2310.17116'
     st.caption("Created by Yang Yi Poh: Yang.Poh@monash.edu")
     st.divider()
     st.subheader('Application for the paper "Neonatal Chest Sound Separation using Deep Learning"')
-    st.write(f'The following application can be found on [Github]({gh_url}) and [Docker]({dcker_url}) for deployment')
+    st.write(f'The following application can be found on [Github]({gh_url}) \
+             and [Docker]({dcker_url}) for deployment')
+    st.divider()
+    st.write(f'The paper for the model can be found [HERE]({paper_url})')
 
 def main():
     """main GUI function"""
