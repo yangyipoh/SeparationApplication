@@ -2,7 +2,7 @@ version:  "3.7"
 
 services:
   sep_app:
-    container_name: sep_app
+    container_name: sep_app_test
     image: yangyipoh/sep_app
     ports:
       - "8501:8501"
